@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQUERY</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <style>
+        img{
+            max-width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h1>Jugando con Api y AJAX!</h1>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <input type="number" class="form-control" placeholder="Ingresar Numero" id="numero">
+                <button class="btn btn-primary mt-3" id="btnObtener">Obtener Info de SERVIDOR</button>
+            </div>
+            <div class="col">
+                <div id="resultados">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="js/funciones.js"></script>
+    <script>
+        $("#btnObtener").click(async function () {
+            try {
+                var valor = $("#numero").val();
+                var pokemon = await getData(`https://pokeapi.co/api/v2/pokemon/${valor}`);
+
+                var html = `
+
+                    <div class="card">
+                        <img class="imagen" src="${pokemon.sprites.other.dream_world.front_default}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${pokemon.name}</h5>
+                            <p class="card-text">
+                                ${pokemon.abilities[0].ability.name}
+                            </p>
+                        </div>
+                    </div>
+                `;
+                
+                $("#resultados").append(html);
+
+                console.log(pokemon);
+            } catch (error) {
+                console.log(error);
+                alert("Ups. existe un problema.")
+            }
+        });
+
+        $(document).on("click", ".imagen", function(){
+            var texto = $(this).siblings(".card-body").children("h5").html();
+            console.log(texto);
+        });
+
+
+    </script>
+</body>
+
+</html>
