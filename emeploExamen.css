@@ -6,6 +6,8 @@ header{
 header li, header h1{
     display: inline;
     padding: 0px 20px;
+    user-select: none;
+    cursor: pointer;
 }
 
 header div.container{
@@ -20,6 +22,13 @@ header ul{
 }
 li {
     font-size: 30px;
+    &:hover{
+        transition:  0.15s padding ease-out;
+        background-color: #9FC5F8;
+        border-radius: 8px;
+        padding: 10px 20px;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    }
 }
 .titulo{
     display: flex;
@@ -35,6 +44,11 @@ li {
     flex-wrap: nowrap;
     min-height: 450px;
     border-radius: 8px;
+    &:hover{
+        transition:  1s padding ease;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        scale: 1.01;
+    }
 }
 
 .tarjeta div>p{
